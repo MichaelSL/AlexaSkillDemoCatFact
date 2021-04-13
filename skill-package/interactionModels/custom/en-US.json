@@ -1,0 +1,94 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "Cat Fact",
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "GameIntent",
+          "slots": [
+              {
+                  "name": "answerA",
+                  "type": "AMAZON.SearchQuery"
+              },
+              {
+                  "name": "answerB",
+                  "type": "AMAZON.SearchQuery"
+              },
+              {
+                  "name": "answerC",
+                  "type": "AMAZON.SearchQuery"
+              }
+          ],
+          "samples": [
+              "ask me cat questions",
+              "start cat fact game",
+              "tell me cat facts"
+          ]
+      }
+      ],
+      "types": []
+    },
+    "dialog":{
+      "intents": [
+        {
+          "name": "GameIntent",
+          "confirmationRequired": false,
+          "prompts": {},
+          "slots": [
+            {
+              "name": "answerA",
+              "type": "AMAZON.SearchQuery",
+              "confirmationRequired": false,
+              "elicitationRequired": true,
+              "prompts": {
+                "elicitation": "Elicit.Slot.1050798741753.440913300054"
+              }
+            },
+            {
+              "name": "answerB",
+              "type": "AMAZON.SearchQuery",
+              "confirmationRequired": false,
+              "elicitationRequired": false,
+              "prompts": {}
+            },
+            {
+              "name": "answerC",
+              "type": "AMAZON.SearchQuery",
+              "confirmationRequired": false,
+              "elicitationRequired": false,
+              "prompts": {}
+            }
+          ]
+        }
+      ]
+    },
+    "prompts": [
+      {
+        "id": "Elicit.Slot.1050798741753.440913300054",
+        "variations": [
+          {
+            "type": "PlainText",
+            "value": "placeholder"
+          }
+        ]
+      }
+    ]
+  },
+  "version": "1"
+}

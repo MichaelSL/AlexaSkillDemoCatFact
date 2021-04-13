@@ -8,26 +8,70 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
+        const speakOutput = GAME_SOUND1 + WELCOME_MESSAGE;
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            .reprompt(speakOutput)
+            .reprompt(HELP_REPROMPT)
             .getResponse();
     }
 };
-const HelloWorldIntentHandler = {
+
+const DailyGameHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+        const request = handlerInput.requestEnvelope.request;
+        return request.type === 'IntentRequest' && 
+        request.intent.name === 'GameIntent'&&
+            request.dialogState !== 'COMPLETED';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello World!';
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
-    }
+        
+        const request = handlerInput.requestEnvelope.request;
+        const filledSlots = request.intent.slots;
+        const answer = filledSlots.answerA.value;
+        
+        let currentQuestionCounter = 0;
+        let speechOutput = questionArray[currentQuestionCounter].question;
+        let correctAnswer = questionArray[currentQuestionCounter].answer;
+        
+        // if exists in session, we get currentQuestionCounter and previousAnswer
+        let currentIntent = handlerInput.requestEnvelope.request.intent;
+        const {attributesManager,responseBuilder} = handlerInput;
+        const sessionAttributes = attributesManager.getSessionAttributes();
+        if (sessionAttributes[currentIntent.name]) {
+        currentQuestionCounter = sessionAttributes[currentIntent.name].currentQuestionCounter;
+        correctAnswer =sessionAttributes[currentIntent.name].previousAnswer;
+        speechOutput = questionArray[currentQuestionCounter].question;
+        console.log("currentQuestionCounter" + currentQuestionCounter);
+        }
+        if (answer){
+        if (answer.toLowerCase() === correctAnswer) {
+            speechOutput = CORRECT_ANSWER;
+            if (currentQuestionCounter < questionArray.length-1){
+            speechOutput = speechOutput + NEXT_QUESTION_MESSAGE + questionArray[currentQuestionCounter+1].question;
+            correctAnswer = questionArray[currentQuestionCounter+1].answer;
+            }else{
+                speechOutput = speechOutput + CONGRATS_MESSAGE;
+            }
+            currentQuestionCounter++;
+            }
+            else {
+            speechOutput = INCORRECT_ANSWER +" "+ speechOutput;
+            }
+        }
+        // Saving correctAnswer and counter into session
+        let previousAnswer = correctAnswer;
+        sessionAttributes[currentIntent.name] = {currentQuestionCounter,previousAnswer};
+        attributesManager.setSessionAttributes(sessionAttributes);
+        
+        var response =  handlerInput.responseBuilder
+        .speak(speechOutput)
+        .reprompt(speechOutput)
+        .addElicitSlotDirective("answerA")
+        .getResponse();
+        return response;
+    },
 };
+
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -118,3 +162,25 @@ exports.handler = Alexa.SkillBuilders.custom()
         ErrorHandler,
     )
     .lambda();
+
+const SKILL_NAME = "Cat Fact";
+const WELCOME_MESSAGE = ` Welcome to Cat Fact!. You can start a game, saying "Start Cat Fact game".`;
+const GAME_SOUND1 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_player1_01'/>";
+const HELP_MESSAGE = `You can start a game, saying "Start Cat Fact game"... ¿How can I help?`;
+const HELP_REPROMPT = "How can I help?";
+const CORRECT_ANSWER = "Correct!";
+const INCORRECT_ANSWER = "Incorrect!";
+const NEXT_QUESTION_MESSAGE = "Next!";
+const CONGRATS_MESSAGE = "Congratulations, the trivia has ended!";
+const STOP_MESSAGE = "<say-as interpret-as='interjection'>okey dokey</say-as><s> see you later </s>";
+
+const questionArray = [
+    { question: 'Cats are believed to be the only mammals who don’t taste sweetness.', answer: "true" },
+    { question: 'Cats are supposed to have 18 toes (five toes on each front paw; four toes on each back paw).', answer: "true" },
+    { question: 'Cats have 230 bones, while humans only have 206.', answer: "true" },
+    { question: 'Despite popular belief, many cats are actually lactose intolerant.', answer: "true" },
+    { question: 'Cats find it threatening when you make direct eye contact with them.', answer: "true" },
+    { question: 'Meowing is a behavior that cats developed exclusively to communicate with people.', answer: "true" },
+    { question: 'Cats like dogs.', answer: "false" },
+    { question: 'Cats don\'t like to sleep.', answer: "false" }
+];

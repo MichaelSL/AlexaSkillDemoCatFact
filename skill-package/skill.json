@@ -1,0 +1,35 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:us-east-1:643730160333:function:9eafc86c-0b79-4d68-b6ca-9cd659536cf9:Release_0"
+        },
+        "regions": {
+          "EU": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:eu-west-1:643730160333:function:9eafc86c-0b79-4d68-b6ca-9cd659536cf9:Release_0"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:643730160333:function:9eafc86c-0b79-4d68-b6ca-9cd659536cf9:Release_0"
+            }
+          },
+          "FE": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-west-2:643730160333:function:9eafc86c-0b79-4d68-b6ca-9cd659536cf9:Release_0"
+            }
+          }
+        }
+      }
+    },
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "name": "Cat Fact"
+        }
+      }
+    }
+  }
+}
