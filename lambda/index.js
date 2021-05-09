@@ -182,5 +182,7 @@ const questionArray = [
     { question: 'Cats find it threatening when you make direct eye contact with them.', answer: "true" },
     { question: 'Meowing is a behavior that cats developed exclusively to communicate with people.', answer: "true" },
     { question: 'Cats like dogs.', answer: "false" },
-    { question: 'Cats don\'t like to sleep.', answer: "false" }
+    { question: 'Cats don\'t like to sleep.', answer: "false" },
+    { question: 'Which century was the first Cat Video created?', answer: "19" },
+    { question: 'Cat of uncommon color was born in Denmark in 1995. What was the color?', answer: "green" }
 ];
