@@ -168,9 +168,9 @@ const WELCOME_MESSAGE = ` Welcome to Cat Fact!. You can start a game, saying "St
 const GAME_SOUND1 = "<audio src='soundbank://soundlibrary/ui/gameshow/amzn_ui_sfx_gameshow_player1_01'/>";
 const HELP_MESSAGE = `You can start a game, saying "Start Cat Fact game"... ¿How can I help?`;
 const HELP_REPROMPT = "How can I help?";
-const CORRECT_ANSWER = "Correct!";
+const CORRECT_ANSWER = "Correct! ";
 const INCORRECT_ANSWER = "Incorrect!";
-const NEXT_QUESTION_MESSAGE = "Next!";
+const NEXT_QUESTION_MESSAGE = "Next! ";
 const CONGRATS_MESSAGE = "Congratulations, the trivia has ended!";
 const STOP_MESSAGE = "<say-as interpret-as='interjection'>okey dokey</say-as><s> see you later </s>";
 
@@ -178,7 +178,7 @@ const questionArray = [
     { question: 'Cats are believed to be the only mammals who don’t taste sweetness.', answer: "true" },
     { question: 'Cats don\'t like dogs.', answer: "false" },
     { question: 'Cats are supposed to have 18 toes (five toes on each front paw; four toes on each back paw).', answer: "true" },
-    { question: 'Which century was the first Cat Video created?', answer: "19" },
+    { question: 'Which century was the first Cat Video created?', answer: "19th" },
     { question: 'Cats have 230 bones, while humans only have 206.', answer: "true" },
     { question: 'Cat of uncommon color was born in Denmark in 1995. What was the color?', answer: "green" },
     { question: 'Despite popular belief, many cats are actually lactose intolerant.', answer: "true" },
