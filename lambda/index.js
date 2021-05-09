@@ -180,7 +180,7 @@ const questionArray = [
     { question: 'Cats are supposed to have 18 toes (five toes on each front paw; four toes on each back paw).', answer: "true" },
     { question: 'Which century was the first Cat Video created?', answer: "19" },
     { question: 'Cats have 230 bones, while humans only have 206.', answer: "true" },
-    { question: 'Cat of uncommon color was born in Denmark in 1995. What was the color?', answer: "green" }
+    { question: 'Cat of uncommon color was born in Denmark in 1995. What was the color?', answer: "green" },
     { question: 'Despite popular belief, many cats are actually lactose intolerant.', answer: "true" },
     { question: 'Cats find it threatening when you make direct eye contact with them.', answer: "true" },
     { question: 'Meowing is a behavior that cats developed exclusively to communicate with people.', answer: "true" },
